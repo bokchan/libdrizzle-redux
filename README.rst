@@ -153,6 +153,14 @@ versioning scheme based on SemVer.
 A set of guidelines guidelines and tools to help developers and users are
 available at the wiki of the `Neptune`_ project.
 
+To assist with consistent formatting style it is possible to install ``git
+pre-commit hooks`` which will use uncrustify_ to check the code formatting
+automatically. The hooks are installed by running this command from the root of
+the repository::
+
+    ./hooks/install_uncrustify_hooks.sh
+
+
 .. |travis| image:: https://travis-ci.org/sociomantic-tsunami/libdrizzle-redux.svg
    :alt: Travis Build Status
    :target: https://travis-ci.org/sociomantic-tsunami/libdrizzle-redux
@@ -163,3 +171,4 @@ available at the wiki of the `Neptune`_ project.
 .. _here: https://github.com/sociomantic-tsunami/neptune/blob/v0.x.x/doc/library-user.rst
 .. _compiling.rst: docs/compiling.rst
 .. _Neptune: https://github.com/sociomantic-tsunami/neptune/blob/v0.x.x/doc/library-user.rst#contributing-to-a-neptune-versioned-library
+.. _uncrustify: https://github.com/uncrustify/uncrustify
