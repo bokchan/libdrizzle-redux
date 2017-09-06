@@ -42,40 +42,40 @@
  */
 enum drizzle_return_t
 {
-  DRIZZLE_RETURN_OK,
-  DRIZZLE_RETURN_IO_WAIT,
-  DRIZZLE_RETURN_PAUSE,
-  DRIZZLE_RETURN_ROW_BREAK,
-  DRIZZLE_RETURN_MEMORY,
-  DRIZZLE_RETURN_ERRNO,
-  DRIZZLE_RETURN_INTERNAL_ERROR,
-  DRIZZLE_RETURN_GETADDRINFO,
-  DRIZZLE_RETURN_NOT_READY,
-  DRIZZLE_RETURN_BAD_PACKET_NUMBER,
-  DRIZZLE_RETURN_BAD_HANDSHAKE_PACKET,
-  DRIZZLE_RETURN_BAD_PACKET,
-  DRIZZLE_RETURN_PROTOCOL_NOT_SUPPORTED,
-  DRIZZLE_RETURN_UNEXPECTED_DATA,
-  DRIZZLE_RETURN_NO_SCRAMBLE,
-  DRIZZLE_RETURN_AUTH_FAILED,
-  DRIZZLE_RETURN_NULL_SIZE,
-  DRIZZLE_RETURN_ERROR_CODE,
-  DRIZZLE_RETURN_TOO_MANY_COLUMNS,
-  DRIZZLE_RETURN_ROW_END,
-  DRIZZLE_RETURN_LOST_CONNECTION,
-  DRIZZLE_RETURN_COULD_NOT_CONNECT,
-  DRIZZLE_RETURN_NO_ACTIVE_CONNECTIONS,
-  DRIZZLE_RETURN_HANDSHAKE_FAILED,
-  DRIZZLE_RETURN_TIMEOUT,
-  DRIZZLE_RETURN_INVALID_ARGUMENT,
-  DRIZZLE_RETURN_SSL_ERROR,
-  DRIZZLE_RETURN_EOF,
-  DRIZZLE_RETURN_STMT_ERROR,
-  DRIZZLE_RETURN_BINLOG_CRC,
-  DRIZZLE_RETURN_TRUNCATED,
-  DRIZZLE_RETURN_INVALID_CONVERSION,
-  DRIZZLE_RETURN_NOT_FOUND,
-  DRIZZLE_RETURN_MAX /* Always add new codes to the end before this one. */
+    DRIZZLE_RETURN_OK,
+    DRIZZLE_RETURN_IO_WAIT,
+    DRIZZLE_RETURN_PAUSE,
+    DRIZZLE_RETURN_ROW_BREAK,
+    DRIZZLE_RETURN_MEMORY,
+    DRIZZLE_RETURN_ERRNO,
+    DRIZZLE_RETURN_INTERNAL_ERROR,
+    DRIZZLE_RETURN_GETADDRINFO,
+    DRIZZLE_RETURN_NOT_READY,
+    DRIZZLE_RETURN_BAD_PACKET_NUMBER,
+    DRIZZLE_RETURN_BAD_HANDSHAKE_PACKET,
+    DRIZZLE_RETURN_BAD_PACKET,
+    DRIZZLE_RETURN_PROTOCOL_NOT_SUPPORTED,
+    DRIZZLE_RETURN_UNEXPECTED_DATA,
+    DRIZZLE_RETURN_NO_SCRAMBLE,
+    DRIZZLE_RETURN_AUTH_FAILED,
+    DRIZZLE_RETURN_NULL_SIZE,
+    DRIZZLE_RETURN_ERROR_CODE,
+    DRIZZLE_RETURN_TOO_MANY_COLUMNS,
+    DRIZZLE_RETURN_ROW_END,
+    DRIZZLE_RETURN_LOST_CONNECTION,
+    DRIZZLE_RETURN_COULD_NOT_CONNECT,
+    DRIZZLE_RETURN_NO_ACTIVE_CONNECTIONS,
+    DRIZZLE_RETURN_HANDSHAKE_FAILED,
+    DRIZZLE_RETURN_TIMEOUT,
+    DRIZZLE_RETURN_INVALID_ARGUMENT,
+    DRIZZLE_RETURN_SSL_ERROR,
+    DRIZZLE_RETURN_EOF,
+    DRIZZLE_RETURN_STMT_ERROR,
+    DRIZZLE_RETURN_BINLOG_CRC,
+    DRIZZLE_RETURN_TRUNCATED,
+    DRIZZLE_RETURN_INVALID_CONVERSION,
+    DRIZZLE_RETURN_NOT_FOUND,
+    DRIZZLE_RETURN_MAX /* Always add new codes to the end before this one. */
 };
 
 #ifndef __cplusplus
@@ -83,33 +83,33 @@ typedef enum drizzle_return_t drizzle_return_t;
 #endif
 
 /**
-* Check if a drizzle function call succeeded
-*
-* @param[in] ret result code
-* @return true on success, false otherwise
-*/
+ * Check if a drizzle function call succeeded
+ *
+ * @param[in] ret result code
+ * @return true on success, false otherwise
+ */
 static inline bool drizzle_success(drizzle_return_t ret)
 {
-  if (ret == DRIZZLE_RETURN_OK)
-  {
-    return true;
-  }
+    if (ret == DRIZZLE_RETURN_OK)
+    {
+        return true;
+    }
 
-  return false;
+    return false;
 }
 
 /**
-* Check if a drizzle function call failed
-*
-* @param[in] ret result code
-* @return true on fail, false otherwise
-*/
+ * Check if a drizzle function call failed
+ *
+ * @param[in] ret result code
+ * @return true on fail, false otherwise
+ */
 static inline bool drizzle_failed(drizzle_return_t ret)
 {
-  if (ret != DRIZZLE_RETURN_OK)
-  {
-    return true;
-  }
+    if (ret != DRIZZLE_RETURN_OK)
+    {
+        return true;
+    }
 
-  return false;
+    return false;
 }
