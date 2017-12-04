@@ -1,0 +1,28 @@
+{
+    /* Bintray package information.
+       In case the package already exists on Bintray, only the name, repo and subject
+       fields are mandatory. */
+
+
+    "package": {
+        "name": "travis-example", // Bintray package name
+        "repo": "libdrizzle-redux", // Bintray repository name
+        "subject": "andreas-bok-sociomantic" // Bintray subject (user or organization)
+    },
+
+    "version": {
+        "name": "$TRAVIS_TAG"
+
+
+    },
+
+    "files":
+        [
+        {
+            "includePattern": "pkg/rpm/(.*\\.rpm)",
+            "uploadPattern": "rpms/$1"
+        }
+        ],
+
+    "publish": true
+}

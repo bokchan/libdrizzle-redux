@@ -101,11 +101,10 @@ deploy:
           repo: sociomantic-tsunami/libdrizzle-redux # must be upstream
           condition: $TRAVIS_OS_NAME = 'linux' && $DIST_NAME = 'ubuntu' && $DIST_VERSION = 'xenial' && $CC = 'gcc' && $MAKE_TARGET =~ 'deb' && $DEPLOY_PACKAGE = 'true'
     - provider: bintray
-      file: travis/travis.rpm.bintray.deploy.json
+      file: ./travis/travis.rpm.bintray.deploy.json
       user: andreas-bok-sociomantic
       key: 90666eea028a0c1f2ec69a420844143c3e3517c7
       dry-run: 1
       on:
-        tags: true
-        repo: andreas-bok-sociomantic/libdrizzle-redux
-        condition: $TRAVIS_OS_NAME = 'linux' && $DIST_NAME = 'centos' && $CC = 'gcc' && $MAKE_TARGET =~ 'rpm' && $DEPLOY_PACKAGE = 'true'
+          tags: true
+          condition: $TRAVIS_OS_NAME = 'linux' && $DIST_NAME = 'centos' && $CC = 'clang' && $MAKE_TARGET =~ 'rpm' && $DEPLOY_PACKAGE = 'true'
