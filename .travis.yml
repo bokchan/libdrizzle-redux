@@ -41,8 +41,8 @@ env:
     - PATH="$(git config -f .gitmodules submodule.beaver.path)/bin:$PATH"
     - SKIP_TEST_ON_ERROR=0
   matrix:
-    - COMPILER_VERSION=4.9 MAKE_TARGET="$MAKE_TARGET:deb" DEPLOY_PACKAGE=true
-    - CXX=clang++ CC=clang COMPILER_VERSION=3.9
+#    - COMPILER_VERSION=4.9 MAKE_TARGET="$MAKE_TARGET:deb" DEPLOY_PACKAGE=true
+#    - CXX=clang++ CC=clang COMPILER_VERSION=3.9
     - DIST_NAME=centos DIST_VERSION=7 MAKE_TARGET=rpm DEPLOY_PACKAGE=true
 #    - DIST_NAME=centos DIST_VERSION=7 MAKE_TARGET=rpm
 
