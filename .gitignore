@@ -11,6 +11,7 @@
 aclocal.m4
 aminclude.am
 autom4te.cache/
+bintray/*.json
 build-aux/
 config.h
 config.in

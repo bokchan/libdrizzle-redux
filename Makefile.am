@@ -50,6 +50,7 @@ EXTRA_DIST+= COPYING
 maintainer-clean-local:
 	-rm Makefile.in
 	-rm aclocal.m4
+	-rm bintray/travis.rpm.bintray.deploy.json
 	-rm build-aux/compile
 	-rm build-aux/config.guess
 	-rm build-aux/config.sub

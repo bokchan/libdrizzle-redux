@@ -2,7 +2,8 @@ Summary: Simplified API to MySQL databases
 Name: @PACKAGE@
 Version: @VERSION@
 Release: 1
-License: BSD
+License: Simplified BSD License
+Vendor: Sociomantic Labs GmbH
 Group: System Environment/Libraries
 BuildRequires: zlib-devel openssl-devel
 URL: https://github.com/sociomantic-tsunami/libdrizzle-redux

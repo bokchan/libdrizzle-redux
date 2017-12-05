@@ -4,20 +4,20 @@
        fields are mandatory. */
 
     "package": {
-        "name": "libdrizzle-redux", // Bintray package name
+        "name": "@PACKAGE_NAME@", // Bintray package name
         "repo": "libdrizzle-redux", // Bintray repository name
         "subject": "andreas-bok-sociomantic" // Bintray subject (user or organization)
     },
 
     "version": {
-        "name": "5.7.3-rc1"
+        "name": "@PACKAGE_VERSION@"
     },
 
     "files":
         [
         {
             "includePattern": "pkg/rpm/(.*\\.rpm)",
-            "uploadPattern": "rpms/$1",
+            "uploadPattern": "releases/$1",
             "matrixParams": { "override" : 1 }
         }
         ],

@@ -149,6 +149,7 @@ AC_CONFIG_FILES([Makefile
                  docs/conf.py
                  pkg/rpm/spec
                  libdrizzle-5.1/version.h
+                 bintray/travis.rpm.bintray.deploy.json
                  ])
 
 AC_OUTPUT
