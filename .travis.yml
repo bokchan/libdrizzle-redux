@@ -94,17 +94,18 @@ script:
 ##
 ## deb package built on ubuntu xenial with gcc
 deploy:
-    - provider: script
-      script: beaver bintray upload -D $DIST_VERSION -N pkg/deb/*.deb
-      skip_cleanup: true
-      on:
-          tags: true # must be a git tag
-          repo: sociomantic-tsunami/libdrizzle-redux # must be upstream
-          condition: $TRAVIS_OS_NAME = 'linux' && $DIST_NAME = 'ubuntu' && $DIST_VERSION = 'xenial' && $CC = 'gcc' && $MAKE_TARGET =~ 'deb' && $DEPLOY_PACKAGE = 'true'
-    - provider: bintray
-      file: ./travis/travis.rpm.bintray.deploy.json
-      user: andreas-bok-sociomantic
-      key: 90666eea028a0c1f2ec69a420844143c3e3517c7
-      on:
-          tags: true
-          condition: $TRAVIS_OS_NAME = 'linux' && $DIST_NAME = 'centos' && $CC = 'clang' && $MAKE_TARGET =~ 'rpm' && $DEPLOY_PACKAGE = 'true'
+  - provider: script
+    script: beaver bintray upload -D $DIST_VERSION -N pkg/deb/*.deb
+    skip_cleanup: true
+    on:
+        tags: true # must be a git tag
+        repo: sociomantic-tsunami/libdrizzle-redux # must be upstream
+        condition: $TRAVIS_OS_NAME = 'linux' && $DIST_NAME = 'ubuntu' && $DIST_VERSION = 'xenial' && $CC = 'gcc' && $MAKE_TARGET =~ 'deb' && $DEPLOY_PACKAGE = 'true'
+  - provider: bintray
+    file: ./travis/travis.rpm.bintray.deploy.json
+    user: andreas-bok-sociomantic
+    key: 90666eea028a0c1f2ec69a420844143c3e3517c7
+    on:
+        tags: true
+        repo: sociomantic-tsunami/libdrizzle-redux # must be upstream
+        condition: $TRAVIS_OS_NAME = 'linux' && $DIST_NAME = 'centos' && $CC = 'gcc' && $MAKE_TARGET =~ 'rpm' && $DEPLOY_PACKAGE = 'true'
