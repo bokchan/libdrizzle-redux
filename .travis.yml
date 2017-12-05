@@ -79,6 +79,7 @@ matrix:
 
 ## Install dependencies
 before_install:
+  - env
   - ./travis_configure.sh before_install
 
 ## Prepare build system for tests
@@ -104,7 +105,6 @@ deploy:
       file: ./travis/travis.rpm.bintray.deploy.json
       user: andreas-bok-sociomantic
       key: 90666eea028a0c1f2ec69a420844143c3e3517c7
-      dry-run: 1
       on:
           tags: true
           condition: $TRAVIS_OS_NAME = 'linux' && $DIST_NAME = 'centos' && $CC = 'clang' && $MAKE_TARGET =~ 'rpm' && $DEPLOY_PACKAGE = 'true'

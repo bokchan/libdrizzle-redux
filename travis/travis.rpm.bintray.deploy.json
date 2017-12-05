@@ -12,8 +12,6 @@
 
     "version": {
         "name": "$TRAVIS_TAG"
-
-
     },
 
     "files":
