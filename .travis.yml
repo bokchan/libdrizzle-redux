@@ -53,6 +53,7 @@ script:
 #  OSX based builds are done by a third-party provider
 #
 #  ¹ The compiler reported is the Apple LLVM version
+#
 jobs:
   templates:
     # Global config for builds on linux
@@ -71,7 +72,15 @@ jobs:
     # Sets up the build environment, compiles the code and runs tests
     - <<: *linux-build
       env:
-        COMPILER_VERSION=4.9 MAKE_TARGET="$MAKE_TARGET:deb" DEPLOY_PACKAGE=true
+        COMPILER_VERSION=4.9 MAKE_TARGET="$MAKE_TARGET:deb"
+      deploy:
+          provider: script
+          script: beaver bintray upload -D $DIST_VERSION -N build/pkg/deb/*.deb
+          skip_cleanup: true
+          on:
+              tags: true # must be a git tag
+              repo: sociomantic-tsunami/libdrizzle-redux # must be upstream
+              condition: $DIST_VERSION = 'xenial' && $CC = 'gcc'
     - <<: *linux-build
       env:
         CXX=clang++ CC=clang COMPILER_VERSION=3.9
@@ -79,20 +88,3 @@ jobs:
       env:
         DIST_NAME=centos DIST_VERSION=7 MAKE_TARGET=rpm
     - <<: *osx-build
-
-    ## Deploy debian packages to bintray
-    - stage: deploy
-      script: skip
-      if:
-        tag IS present AND
-        repo = sociomantic-tsunami/libdrizzle-redux AND
-        env(TRAVIS_OS_NAME) = 'linux' AND
-        env(DIST_NAME) = 'ubuntu' AND
-        env(DIST_VERSION) = 'xenial' AND
-        env(CC) = 'gcc' AND
-        env(MAKE_TARGET) =~ 'deb' AND
-        env(DEPLOY_PACKAGE) = 'true'
-      deploy:
-        provider: script
-        script: beaver bintray upload -D $DIST_VERSION -N build/pkg/deb/*.deb
-        skip_cleanup: true
