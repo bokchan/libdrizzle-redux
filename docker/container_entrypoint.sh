@@ -2,6 +2,14 @@
 #
 # common entrypoint for the container
 
+echo "MY UNCRUSTIFY"
+which uncrustify
+
+ls -la
+
+sh -c ./docker/test_uncrustify.sh
+exit 0
+
 COMPILER_VERSION=${COMPILER_VERSION:+-$COMPILER_VERSION}
 
 source "entrypoint.$DIST_NAME.sh"

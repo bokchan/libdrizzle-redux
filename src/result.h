@@ -43,110 +43,106 @@
  */
 struct drizzle_result_st
 {
-    drizzle_st *con;
-    drizzle_result_st *next;
-    drizzle_result_st *prev;
-    drizzle_result_options_t options;
+  drizzle_st *con;
+  drizzle_result_st *next;
+  drizzle_result_st *prev;
+  drizzle_result_options_t options;
 
-    char info[DRIZZLE_MAX_INFO_SIZE];
-    uint16_t error_code;
-    char sqlstate[DRIZZLE_MAX_SQLSTATE_SIZE + 1];
-    uint64_t insert_id;
-    uint16_t warning_count;
-    uint64_t affected_rows;
+  char info[DRIZZLE_MAX_INFO_SIZE];
+  uint16_t error_code;
+  char sqlstate[DRIZZLE_MAX_SQLSTATE_SIZE + 1];
+  uint64_t insert_id;
+  uint16_t warning_count;
+  uint64_t affected_rows;
 
-    uint16_t column_count;
-    uint16_t column_current;
-    drizzle_column_st *column_list;
-    drizzle_column_st *column;
-    drizzle_column_st *column_buffer;
+  uint16_t column_count;
+  uint16_t column_current;
+  drizzle_column_st *column_list;
+  drizzle_column_st *column;
+  drizzle_column_st *column_buffer;
 
-    uint64_t row_count;
-    uint64_t row_current;
+  uint64_t row_count;
+  uint64_t row_current;
 
-    uint16_t field_current;       /* field index */
-    uint16_t field_current_read;  /* index of the field currently being read */
-    uint64_t field_total;         /* total length of the field currently being
-                                   * read */
-    uint64_t field_offset;        /* offset within field of most recently read
-                                   * field fragment (0 if first/only fragment)
-                                   * */
-    uint32_t field_size;          /* size of most recently read field value or
-                                   * fragment of field value; max 2^24 */
-    drizzle_field_t field;
-    drizzle_field_t *field_buffer;
-    size_t *field_buffer_sizes;
+  uint16_t field_current;         /* field index */
+  uint16_t field_current_read;    /* index of the field currently being read */
+  uint64_t field_total;           /* total length of the field currently being read */
+  uint64_t field_offset;          /* offset within field of most recently read field fragment (0 if first/only fragment) */
+  uint32_t field_size;            /* size of most recently read field value or fragment of field value; max 2^24 */
+  drizzle_field_t field;
+  drizzle_field_t *field_buffer;
+  size_t *field_buffer_sizes;
 
-    size_t row_list_size;
-    drizzle_row_t row;
-    drizzle_row_t *row_list;
-    size_t *field_sizes;
-    size_t **field_sizes_list;
-    drizzle_binlog_st *binlog_event;
-    bool binlog_checksums;
-    uint8_t **null_bitmap_list;
-    uint8_t *null_bitmap;
-    uint16_t null_bitmap_length;
-    uint16_t null_bitcount;
-    bool binary_rows;
+  size_t row_list_size;
+  drizzle_row_t row;
+  drizzle_row_t *row_list;
+  size_t *field_sizes;
+  size_t **field_sizes_list;
+  drizzle_binlog_st *binlog_event;
+  bool binlog_checksums;
+  uint8_t **null_bitmap_list;
+  uint8_t *null_bitmap;
+  uint16_t null_bitmap_length;
+  uint16_t null_bitcount;
+  bool binary_rows;
 
-    drizzle_result_st() :
-        con(NULL),
-        next(NULL),
-        prev(NULL),
-        options(DRIZZLE_RESULT_NONE),
-        error_code(0),
-        insert_id(0),
-        warning_count(0),
-        affected_rows(0),
-        column_count(0),
-        column_current(0),
-        column_list(NULL),
-        column(NULL),
-        column_buffer(NULL),
-        row_count(0),
-        row_current(0),
-        field_current(0),
-        field_current_read(0),
-        field_total(0),
-        field_offset(0),
-        field_size(0),
-        field(NULL),
-        field_buffer(NULL),
-        row_list_size(0),
-        row(NULL),
-        row_list(NULL),
-        field_sizes(NULL),
-        field_sizes_list(NULL),
-        binlog_event(NULL),
-        binlog_checksums(false),
-        null_bitmap_list(NULL),
-        null_bitmap(NULL),
-        null_bitmap_length(0),
-        null_bitcount(0),
-        binary_rows(false)
+  drizzle_result_st() :
+    con(NULL),
+    next(NULL),
+    prev(NULL),
+    options(DRIZZLE_RESULT_NONE),
+    error_code(0),
+    insert_id(0),
+    warning_count(0),
+    affected_rows(0),
+    column_count(0),
+    column_current(0),
+    column_list(NULL),
+    column(NULL),
+    column_buffer(NULL),
+    row_count(0),
+    row_current(0),
+    field_current(0),
+    field_current_read(0),
+    field_total(0),
+    field_offset(0),
+    field_size(0),
+    field(NULL),
+    field_buffer(NULL),
+    row_list_size(0),
+    row(NULL),
+    row_list(NULL),
+    field_sizes(NULL),
+    field_sizes_list(NULL),
+    binlog_event(NULL),
+    binlog_checksums(false),
+    null_bitmap_list(NULL),
+    null_bitmap(NULL),
+    null_bitmap_length(0),
+    null_bitcount(0),
+    binary_rows(false)
+  {
+    info[0]= '\0';
+    sqlstate[0]= '\0';
+  }
+
+  bool push_state(drizzle_state_fn* func_)
+  {
+    if (con)
     {
-        info[0] = '\0';
-        sqlstate[0] = '\0';
+      return con->push_state(func_);
     }
 
-    bool push_state(drizzle_state_fn *func_)
-    {
-        if (con)
-        {
-            return con->push_state(func_);
-        }
+    return false;
+  }
 
-        return false;
+  bool has_state() const
+  {
+    if (con)
+    {
+      return con->has_state();
     }
 
-    bool has_state() const
-    {
-        if (con)
-        {
-            return con->has_state();
-        }
-
-        return false;
-    }
+    return false;
+  }
 };
