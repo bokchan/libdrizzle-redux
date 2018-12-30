@@ -99,6 +99,9 @@ jobs:
         COMPILER_VERSION=4.9 MAKE_TARGET=$MAKE_TARGET:deb:api-sanity-checker
       before_cache:
         - if [[ -n "$TRAVIS_TAG" ]]; then cp build/pkg/deb/*.deb $CACHE_DIR/; fi
+      after_sucess:
+#        - if [[ $TRAVIS_PULL_REQUEST ]]; then ./docker/uncrustify.script.sh; fi
+        - test_uncrustify.sh
     - <<: *linux-build
       env:
         DOCKER_CXX=clang++ DOCKER_CC=clang COMPILER_VERSION=3.9

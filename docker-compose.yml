@@ -48,6 +48,7 @@ services:
       - ./:/home/libdrizzle-redux/
       - ./docker/entrypoint.$DIST_NAME.sh:/usr/local/bin/entrypoint.$DIST_NAME.sh
       - ./docker/container_entrypoint.sh:/usr/local/bin/container_entrypoint.sh
+      - ./docker/uncrustify.script.sh:/usr/local/bin/test_uncrustify.sh
     working_dir: /home/libdrizzle-redux/
     entrypoint:
       - container_entrypoint.sh
