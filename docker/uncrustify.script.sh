@@ -17,7 +17,12 @@ set -e
 
 #    jq '.[0].parents[0] | .sha' commits.json  | tr -d '"' | xargs git diff
 
-PR_PARENT_SHA=`curl https://api.github.com/repos/sociomantic-tsunami/libdrizzle-redux/pulls/$TRAVIS_PULL_REQUEST/commits | \
-jq '.[0].parents[0] | .sha' | tr -d '"'`
+#PR_PARENT_SHA=`curl https://api.github.com/repos/sociomantic-tsunami/libdrizzle-redux/pulls/$TRAVIS_PULL_REQUEST/commits | \
+#jq '.[0].parents[0] | .sha' | tr -d '"'`
 
-echo "PR_PARENT_SHA $PR_PARENT_SHA"
+#echo "PR_PARENT_SHA $PR_PARENT_SHA"
+
+echo "TRAVIS_PULL_REQUEST_SLUG: $TRAVIS_PULL_REQUEST_SLUG"
+echo "TRAVIS_PULL_REQUEST_SHA: $TRAVIS_PULL_REQUEST_SHA"
+echo "TRAVIS_PULL_REQUEST: $TRAVIS_PULL_REQUEST"
+echo "TRAVIS_PULL_REQUEST_BRANCH: $TRAVIS_PULL_REQUEST_BRANCH"
