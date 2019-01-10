@@ -34,6 +34,10 @@ services:
       CXX: $DOCKER_CXX
       CC: $DOCKER_CC
       DRIZZLE_MYSQL_CA_PATH: "/home/ssl-certs"
+      TRAVIS_PULL_REQUEST_SLUG: $TRAVIS_PULL_REQUEST_SLUG
+      TRAVIS_PULL_REQUEST_SHA: $TRAVIS_PULL_REQUEST_SHA
+      TRAVIS_PULL_REQUEST: $TRAVIS_PULL_REQUEST
+      TRAVIS_PULL_REQUEST_BRANCH: $TRAVIS_PULL_REQUEST_BRANCH
     build:
       dockerfile: ./docker/Dockerfile.$DIST_NAME.$DIST_VERSION
       context: ./
@@ -48,6 +52,7 @@ services:
       - ./:/home/libdrizzle-redux/
       - ./docker/entrypoint.$DIST_NAME.sh:/usr/local/bin/entrypoint.$DIST_NAME.sh
       - ./docker/container_entrypoint.sh:/usr/local/bin/container_entrypoint.sh
+      - ./docker/uncrustify.script.sh:/usr/local/bin/uncrustify.script.sh
     working_dir: /home/libdrizzle-redux/
     entrypoint:
       - container_entrypoint.sh

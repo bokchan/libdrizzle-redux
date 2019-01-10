@@ -2,6 +2,13 @@
 #
 # common entrypoint for the container
 
+echo "MY UNCRUSTIFY"
+which uncrustify
+
+uncrustify.script.sh
+
+exit 0
+
 COMPILER_VERSION=${COMPILER_VERSION:+-$COMPILER_VERSION}
 
 source "entrypoint.$DIST_NAME.sh"
